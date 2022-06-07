@@ -1,15 +1,6 @@
-const bootstrapSassAbstractsImports = require('vue-cli-plugin-bootstrap-vue/sassAbstractsImports.js')
-const { defineConfig } = require("@vue/cli-service");
+const { defineConfig } = require('@vue/cli-service')
+const path = require("path");
 module.exports = defineConfig({
   transpileDependencies: true,
-});
-	css: {
-		loaderOptions: {
-			sass: {
-				additionalData: bootstrapSassAbstractsImports.join('\n')
-			}
-			scss: {
-				additionalData: [...bootstrapSassAbstractsImports, ''].join(';\n')
-			}
-		}
-	}
+  outputDir: path.resolve(__dirname, "../backend/public"),
+})

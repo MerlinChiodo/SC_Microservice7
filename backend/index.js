@@ -18,6 +18,9 @@ app.use('/api/course', course)
 app.use('/api/employee', employee)
 app.use('/api/member', member)
 
+
+app.use(express.static('public'));
+
 app.listen(port, () => {
     console.log(`Fitnessstudio-backend started at http://localhost:${port}`);
   });

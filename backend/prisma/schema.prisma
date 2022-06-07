@@ -1,5 +1,5 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -8,78 +8,82 @@ datasource db {
 }
 
 model AboutUs {
-    id          Int         @id @default(autoincrement())
-    text        String      @db.VarChar(255)
-    date        DateTime    @default(now()) @db.Timestamp(0)
-    author      Mitarbeiter @relation(fields: [authorid], references: [id])
-    authorid    Int
+  id       Int         @id @default(autoincrement())
+  text     String      @db.VarChar(255)
+  date     DateTime    @default(now()) @db.Timestamp(0)
+  authorid Int
+  author   Mitarbeiter @relation(fields: [authorid], references: [id])
 
-    @@map("aboutUs")
+  @@index([authorid], map: "aboutUs_authorid_fkey")
+  @@map("aboutUs")
 }
 
 model Event {
-    id          Int         @id @default(autoincrement())
-    title       String      @db.VarChar(30)
-    text        String      @db.VarChar(255)
-    date        DateTime?   @db.Timestamp(0)
-    author      Mitarbeiter @relation(fields: [authorid], references: [id])
-    authorid    Int
+  id       Int         @id @default(autoincrement())
+  title    String      @db.VarChar(30)
+  text     String      @db.VarChar(255)
+  date     DateTime?   @db.Timestamp(0)
+  authorid Int
+  author   Mitarbeiter @relation(fields: [authorid], references: [id])
 
-    @@map("event")
+  @@index([authorid], map: "event_authorid_fkey")
+  @@map("event")
 }
 
 model Tarif {
-    id          Int     @id @default(autoincrement())
-    name        String  @db.VarChar(30)
-    prize       Float
-    services    String  @db.VarChar(255)
-    conditions  String? @db.VarChar(255)
-    mitglieder  Mitglied[]
+  id         Int        @id @default(autoincrement())
+  name       String     @db.VarChar(30)
+  prize      Float
+  services   String     @db.VarChar(255)
+  conditions String?    @db.VarChar(255)
+  mitglieder Mitglied[]
 
-    @@map("tarif")
+  @@map("tarif")
 }
 
 model Mitglied {
-    id          Int     @id @default(autoincrement())
-    lastname    String  @db.VarChar(30)
-    firstname   String  @db.VarChar(30)
-    tarif       Tarif   @relation(fields: [tarifid], references: [id])
-    tarifid     Int
-    gassi       Boolean @default(false)
-    kurse       Kurs[]
+  id        Int     @id @default(autoincrement())
+  lastname  String  @db.VarChar(30)
+  firstname String  @db.VarChar(30)
+  tarifid   Int
+  gassi     Boolean @default(false)
+  tarif     Tarif   @relation(fields: [tarifid], references: [id])
+  kurse     Kurs[]
 
-    @@map("mitglied")
+  @@index([tarifid], map: "mitglied_tarifid_fkey")
+  @@map("mitglied")
 }
 
 model Kurs {
-    id          Int         @id @default(autoincrement())
-    name        String      @db.VarChar(30)
-    day         String      @db.VarChar(30)
-    start       DateTime    @db.Timestamp(0)
-    end         DateTime    @db.Timestamp(0)
-    description String?     @db.VarChar(255)
-    coach       Mitarbeiter @relation(fields: [coachid], references: [id])
-    coachid     Int
-    members     Mitglied[]
+  id          Int         @id @default(autoincrement())
+  name        String      @db.VarChar(30)
+  day         String      @db.VarChar(30)
+  start       DateTime    @db.Timestamp(0)
+  end         DateTime    @db.Timestamp(0)
+  description String?     @db.VarChar(255)
+  coachid     Int
+  coach       Mitarbeiter @relation(fields: [coachid], references: [id])
+  members     Mitglied[]
 
-    @@map("kurs")
+  @@index([coachid], map: "kurs_coachid_fkey")
+  @@map("kurs")
 }
 
 model Mitarbeiter {
-    id          Int     @id @default(autoincrement())
-    lastname    String  @db.VarChar(30)
-    firstname   String  @db.VarChar(30)
-    salary      Int
-    kurse       Kurs[]
-    events      Event[]
-    aboutus     AboutUs[]
+  id        Int       @id @default(autoincrement())
+  lastname  String    @db.VarChar(30)
+  firstname String    @db.VarChar(30)
+  salary    Int
+  aboutus   AboutUs[]
+  events    Event[]
+  kurse     Kurs[]
 
-    @@map("mitarbeiter")
+  @@map("mitarbeiter")
 }
 
 model pet {
-    name        String  @db.VarChar(30)
-    description String  @db.VarChar(255)
+  name        String @db.VarChar(30)
+  description String @db.VarChar(255)
 
-    @@id([name,description])
+  @@id([name, description])
 }
