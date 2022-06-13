@@ -1,15 +1,23 @@
 <template>
-  <HeaderCom />
+<div>
+  <HeaderNavBar />
+  <WelcomePage />
+  <FooterArea />
+</div>
 </template>
 
 <script>
 
-import HeaderCom from "./components/Header.vue"
+import HeaderNavBar from "./components/HeaderNavBar.vue"
+import FooterArea from "./components/FooterArea.vue"
+import WelcomePage from "./views/WelcomePage.vue"
 
 export default {
   name: 'App',
   components: {
-    HeaderCom
+    HeaderNavBar,
+    FooterArea,
+    WelcomePage
   }
 }
 </script>
