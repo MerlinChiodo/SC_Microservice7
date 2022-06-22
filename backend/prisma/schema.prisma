@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model AboutUs {
+  id       Int         @id @default(autoincrement())
+  text     String      @db.VarChar(255)
+  date     DateTime    @default(now()) @db.Timestamp(0)
+  authorid Int
+  author   Mitarbeiter @relation(fields: [authorid], references: [id])
+
+  @@index([authorid], map: "aboutUs_authorid_fkey")
+  @@map("aboutUs")
+}
+
+model Event {
+  id       Int         @id @default(autoincrement())
+  title    String      @db.VarChar(30)
+  text     String      @db.VarChar(255)
+  date     DateTime?   @db.Timestamp(0)
+  authorid Int
+  author   Mitarbeiter @relation(fields: [authorid], references: [id])
+
+  @@index([authorid], map: "event_authorid_fkey")
+  @@map("event")
+}
+
+model Tarif {
+  id         Int        @id @default(autoincrement())
+  name       String     @db.VarChar(30)
+  prize      Float
+  services   String     @db.VarChar(255)
+  conditions String?    @db.VarChar(255)
+  mitglieder Mitglied[]
+
+  @@map("tarif")
+}
+
+model Mitglied {
+  id        Int     @id @default(autoincrement())
+  lastname  String  @db.VarChar(30)
+  firstname String  @db.VarChar(30)
+  tarifid   Int
+  gassi     Boolean @default(false)
+  tarif     Tarif   @relation(fields: [tarifid], references: [id])
+  kurse     Kurs[]
+
+  @@index([tarifid], map: "mitglied_tarifid_fkey")
+  @@map("mitglied")
+}
+
+model Kurs {
+  id          Int         @id @default(autoincrement())
+  name        String      @db.VarChar(30)
+  day         String      @db.VarChar(30)
+  start       DateTime    @db.Timestamp(0)
+  end         DateTime    @db.Timestamp(0)
+  description String?     @db.VarChar(255)
+  coachid     Int
+  coach       Mitarbeiter @relation(fields: [coachid], references: [id])
+  members     Mitglied[]
+
+  @@index([coachid], map: "kurs_coachid_fkey")
+  @@map("kurs")
+}
+
+model Mitarbeiter {
+  id        Int       @id @default(autoincrement())
+  lastname  String    @db.VarChar(30)
+  firstname String    @db.VarChar(30)
+  salary    Int
+  aboutus   AboutUs[]
+  events    Event[]
+  kurse     Kurs[]
+
+  @@map("mitarbeiter")
+}
+
+model pet {
+  name        String @db.VarChar(30)
+  description String @db.VarChar(255)
+
+  @@id([name, description])
+}
