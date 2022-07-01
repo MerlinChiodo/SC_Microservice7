@@ -10,8 +10,7 @@ router.post('/',
     header('token').not().isEmpty().trim().escape(),
     body('lastname').not().isEmpty().isAlpha(),
     body('firstname').not().isEmpty().isAlpha(),
-    body('tarifID').not().isEmpty().isNumeric(),
-    body('gassi').not().isEmpty().isBoolean(),
+    body('tarif').not().isEmpty().isNumeric(),
     createMember)
 
 router.put('/',

@@ -4,16 +4,16 @@ const prisma = require('../../prisma/prismaclient')
 
 const createMember = async (req, res) => {
     const errors = validationResult(req);
-    // // if(!errors.isEmpty()){
-    // //     return res.status(422).json({ errors: errors.array()[0] });
-    // // }
+     if(!errors.isEmpty()){
+         return res.status(422).json({ errors: errors.array()[0] });
+     }
     if(auth.auth()){
         console.log(req.header.test);
         const member = await prisma.mitglied.create({
             data: {
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
-                tarifid: parseInt(req.body.tarifID)
+                tarifid: parseInt(req.body.tarif)
             },
           })
         return res.status(400).json({ message: "Created member" });
