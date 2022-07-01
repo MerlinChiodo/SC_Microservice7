@@ -1,13 +1,22 @@
 const {validationResult} = require('express-validator');
 const auth = require('../auth');
+const prisma = require('../../prisma/prismaclient')
 
 const createMember = async (req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(422).json({ errors: errors.array()[0] });
-    }
+    // // if(!errors.isEmpty()){
+    // //     return res.status(422).json({ errors: errors.array()[0] });
+    // // }
     if(auth.auth()){
-        return res.status(422).json({ message: "Could not create member" });
+        console.log(req.header.test);
+        const member = await prisma.mitglied.create({
+            data: {
+                lastname: req.body.lastname,
+                firstname: req.body.firstname,
+                tarifid: parseInt(req.body.tarifID)
+            },
+          })
+        return res.status(400).json({ message: "Created member" });
     }else{
         return res.status(401).json({ message: "You don't have rights to do this" });
     } 

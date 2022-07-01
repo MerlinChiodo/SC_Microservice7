@@ -1,7 +1,8 @@
 <template>
 <div>
   <HeaderNavBar />
-  <WelcomePage />
+  <router-view></router-view>
+
   <FooterArea />
 </div>
 </template>
@@ -10,14 +11,14 @@
 
 import HeaderNavBar from "./components/HeaderNavBar.vue"
 import FooterArea from "./components/FooterArea.vue"
-import WelcomePage from "./views/WelcomePage.vue"
+//import WelcomePage from "./views/WelcomePage.vue"
 
 export default {
   name: 'App',
   components: {
     HeaderNavBar,
-    FooterArea,
-    WelcomePage
+    FooterArea//,
+//    WelcomePage
   }
 }
 </script>

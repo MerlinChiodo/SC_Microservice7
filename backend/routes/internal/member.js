@@ -8,7 +8,6 @@ router.use(express.json())
 
 router.post('/',
     header('token').not().isEmpty().trim().escape(),
-    body('id').not().isEmpty().isNumeric(),
     body('lastname').not().isEmpty().isAlpha(),
     body('firstname').not().isEmpty().isAlpha(),
     body('tarifID').not().isEmpty().isNumeric(),
