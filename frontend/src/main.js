@@ -6,7 +6,7 @@ const Fitnessstudio = {
     install(app) {
       app.config.globalProperties.fetch_post = async (headers, body, route) => {
         headers['Content-Type'] = "application/json";
-//        headers['token'] = app.getToken();
+        headers['token'] = 1234;
         const options = {
           method: 'POST',
           headers: headers,

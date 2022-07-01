@@ -35,7 +35,7 @@
                 </div>
                 <input type="text" class="form-control" id="inputBeleg" placeholder="Beleg" v-model="beleg">
             </div>
-            <button type="submit" class="btn btn-primary" @click="createMember()">Anmelden</button>
+            <button type="button" class="btn btn-primary" @click="createMember()">Anmelden</button>
         </form>
     </div>
 </template>
@@ -43,12 +43,20 @@
 <script>
 export default {
   name: 'CreateMember',
+  data() {
+    return {
+        lastname: null,
+        firstname: null,
+        tarifID: null
+    }
+  },
   methods: {
     async createMember() {
+        console.log("Klappt");
       let body = {
                 lastname: this.lastname,
                 firstname: this.firstname,
-                tarifID: 1
+                tarif: 1
             };
       let data = await this.fetch_post({} , body, '/api/member');
       if(data && !data.errors){

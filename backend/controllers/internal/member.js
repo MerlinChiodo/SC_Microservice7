@@ -16,7 +16,7 @@ const createMember = async (req, res) => {
                 tarifid: parseInt(req.body.tarif)
             },
           })
-        return res.status(400).json({ message: "Created member" });
+        return res.status(201).json({ message: "Created member" });
     }else{
         return res.status(401).json({ message: "You don't have rights to do this" });
     } 
