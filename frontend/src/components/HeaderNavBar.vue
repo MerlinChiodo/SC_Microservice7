@@ -22,7 +22,9 @@
           </li>
         </ul>
         <form class="d-flex">
-          <button class="btn btn-outline-success" type="submit">Mitarbeiterbereich</button>
+            <router-link to="/EmployeeSite" custom v-slot="{ navigate }">
+              <button @click="navigate" @keypress.enter="navigate" role="link">Mitarbeiterbereich</button>
+            </router-link>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown dropdown-menu-right" role="button" data-bs-toggle="dropdown" aria-expanded="true">
               <img src="../assets/logIn.jpg" alt="TTT" width="50" height="50">
