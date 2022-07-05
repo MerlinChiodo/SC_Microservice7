@@ -1,0 +1,27 @@
+{
+    "title": "new animal",
+    "type": "object",
+    "description": "Scheme to control incoming events of a new pet",
+    "properties": {
+      "event_id" : {
+        "type": "integer",
+        "const": 5004
+      },
+      "event_name": {
+        "type": "string",
+        "const": "New Pet For Walk"
+      },
+      "service_name": {
+        "type": "string",
+        "const": "tierheim"
+      },
+      "pet_name": {
+        "type": "string"
+      },
+      "pet_description": {
+        "type": "string"
+      }
+    },
+    "required": ["event_id", "event_name","service_name","pet_name", "pet_description"],
+    "additionalProperties": false
+  }
