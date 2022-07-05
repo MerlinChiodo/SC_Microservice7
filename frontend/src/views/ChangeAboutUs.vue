@@ -5,15 +5,15 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">AboutUs*</span>
                 </div>
-                <input type="text" class="form-control" id="inputLastName" placeholder="Nachname*" v-model="aboutus">
+                <input type="text" class="form-control" id="inputLastName" placeholder="AboutUs*" v-model="aboutus">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Image-URL</span>
                 </div>
-                <input type="text" class="form-control" id="inputBeleg" placeholder="Beleg" v-model="imurl">
+                <input type="text" class="form-control" id="inputBeleg" placeholder="Image-URL" v-model="imurl">
             </div>
-            <button type="button" class="btn btn-primary" @click="postAboutUs()">Anmelden</button>
+            <button type="button" class="btn btn-primary" @click="postAboutUs()">Ändern</button>
         </form>
     </div>
 </template>
